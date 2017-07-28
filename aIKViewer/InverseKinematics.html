@@ -1,0 +1,34 @@
+<html>
+<head>
+</head>
+<body>
+<big style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;"><big>Inverse kinematics</big></big><br>
+<br>
+<big>In this assignment, you will implement inverse
+kinematics. Unlike the previous assignment, where we compute the pose outward from the root, we will now compute the limb orientations based on desired positions for a limb. You implement two algorithms for doing this: a direct analytic method and cyclic coordinate descent (CCD).</big><big><br>
+<br>
+</big>
+<big><span style="font-weight: bold;">User interface overview</span><br>
+<br>
+The basecode includes a simple interface and 3D viewer which loads a model and initializes the GUI to show a list of its joints. See below for a screenshot.<br><br>The camera can be controled with the mouse:<br></big><ul><li><big>Left-button drag with the mouse to rotate</big></li><li><big>Right-button drag with the mouse to pan</big></li><li><big>Middle-button drag with the mouse to zoom</big></li><li><big>'f' button will focus the view on the character<br></big></li></ul><big><big><big>
+</big><span style="font-weight: bold;"></span></big>The IK control panel on the bottom left can be used to set inverse kinematics setting. <br><br><img style="width: 1020px; height: 799px;" alt="IKViewer.jpg" src="IKViewer.jpg"><br><br><br></big><big><span style="font-weight: bold;">Character animation implementation overview</span><br><br>Recall from the previous asignment that characters are represented as a hierarchy of transforms using the </big><big><span style="font-weight: bold;">AnimatableHierarchy</span> class</big><big>. Now you will implement a inverse kinematics controller which modifies the hierarchy based on the desired positions of transforms. </big><big><br>&nbsp;&nbsp;&nbsp;&nbsp; </big><big><br></big><big>
+<span style="font-weight: bold;">Assignment</span><br>
+<br>
+</big><big>1. </big><big>(40 points) <span style="font-weight: bold;">Inverse kinematics. </span><span style="font-weight: bold;"><br>
+</span></big>
+<ol>
+  <big> </big>
+  <ol type="a">
+    <big> </big>
+  </ol>
+  <li><big>(20 points) Implement IKController::solveIKAnalytic()</big></li><li><big>(20 points) </big><big>Implement </big><big>IKController::solveIKCCD() <br></big></li></ol>
+
+<big><br>
+</big>
+<big><span style="font-weight: bold;color: rgb(255,0,0);">
+<a href="../README.html">Build and Submission Instructions!</a>
+</span></big>
+
+<br>
+</body>
+</html>

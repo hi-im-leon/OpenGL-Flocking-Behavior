@@ -1,0 +1,81 @@
+<html>
+<head>
+</head>
+<body>
+<big style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;">
+		<big>Rotations!</big></big><br>
+<br>
+<big>In this assignment segment, you will implement <br>
+</big>
+<ul>
+  <li><big>conversions between different (but equivalent) rotation
+representations: euler, matrix, and quaternions<br>
+    </big></li>
+</ul>
+<big>This assignment contains two demos but this week, we will focus on only one of them: the <span style="font-weight: bold;">Convert Demo</span>.
+
+The Convert Demo computes the same rotation 9 different ways based on euler angles, rotation matrices, and
+quaternions. If all your rotation functions are implemented correctly,
+every pink teapot should match the red teapot on the
+top right. Below is a screenshot. <br>
+<br>
+</big><big>The demo controls panel lets you select the current demo and
+set properties for either demo.</big><br>
+<big><br>
+</big>
+<table style="text-align: center; width: 100%;" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><big><img style="width: 510px; height: 400px;" alt="ConvertDemo" src="ConvertDemo.jpg"></big></td>
+    </tr>
+    <tr>
+      <td>Convert Demo</td>
+    </tr>
+  </tbody>
+</table>
+<big><br>
+<br>
+
+<span style="font-weight: bold;">Assignment</span><br>
+<br>
+1. (50 points) <span style="font-weight: bold;">Rotations</span></big><big><span style="font-weight: bold;">. </span><span style="font-weight: bold;"></span>Implement
+conversions between different rotation representations. See
+RotationViewer::drawDemo1() to debug your conversion routines.<br>
+</big>
+<ol>
+  <li><big>(10 points) </big><big>Convert from euler angles to a 3x3
+matrix, e.g. mat3::FromEulerAnglesZXY()<br>
+    </big></li>
+  <li><big>(10 points) </big><big>Convert from a 3x3 matrix to euler
+angles, e.g. mat3::ToEulerAnglesZXY()</big></li>
+  <li><big>(10 points) </big><big>Convert from 3x3 matrix to
+quaternion, Quaternion::ToRotation()<br>
+    </big></li>
+  <li><big>(10 points) </big><big>Convert from a quaternion to a 3x3
+matrix, Quaternion::FromRotation()</big></li>
+  <li><big>(5 points) </big><big>Convert from a quaternion to angle
+axis, Quaternion::ToAngleAxis()<br>
+    </big></li>
+  <li><big>(5 points) Convert from angle axis to a quaternion,
+Quaternion::FromAngleAxis()<br>
+    </big></li>
+  <li><big>Test your conversions. Change each of the X, Y, and Z
+angles. Also test each of the rotation orders.<br>
+    </big></li>
+</ol>
+<big><span style="font-weight: bold;">Extra challenges:</span> 
+These are optional assignment questions for those of you who want to take their assignments to the next level. Have your own idea you want to explore? Let the instructor know!</big><big><br>
+</big>
+<ol>
+  <li><big>Animate the colors of the teapot to change with the rotation. For example, if the euler angle is (50,75,100), convert it to a color (50/360, 75/360, 100/360). Develop a color mapping which you think looks cool, or helps visualize what's going on.<br></big></li>
+  <li><big>Draw the local axes of the teapot. Use a red line to represent the X axis; a green line to represent the Y axis; and a blue line to represent the Z axis.</big></li>
+  <li><big>Using Euler angles, demonstrate an example of gimbol lock. Explain why it happens and how to avoid it.</big></li>
+  <li><big>What happens if the transformation order is changed in drawDemo1()? Explain why the order of transformations matter.</big></li>
+</ol>
+<br>
+<big><span style="font-weight: bold;color: rgb(255,0,0);">
+<a href="../README.html">Build and Submission Instructions!</a>
+</span></big>
+<br>
+</body>
+</html>

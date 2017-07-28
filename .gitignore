@@ -1,0 +1,51 @@
+bin*
+build*
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.dylib
+lib/libanimationbasic.so
+lib/libanimationbehave.so
+lib/libanimationblend.so
+lib/libanimationcurve.so
+lib/libanimationfk.so
+lib/libanimationik.so
+lib/libanimationpsys.so
+lib/libanimationscurve.so
+lib/libui.so
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Executables
+*.out
+*.app
+
+# Crap
+Debug/
+Release/
+Debug-soln/
+Release-soln/
+*.ncb
+*.user
+*.pdb
+*~
+*.swp
+*.sdf
+bin/*.exe
+Warrok.fbm/
+*.swo

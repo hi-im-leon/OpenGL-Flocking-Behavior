@@ -1,0 +1,32 @@
+<html>
+<head>
+</head>
+<body>
+<big style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;"><big>Motion blending</big></big><br>
+<br>
+<big>In this assignment, you will implement motion blending. A</big><big>fter completing this assignment, you will be able to interactively crossfade between different walking motions. <br>
+<br>
+</big>
+<big><span style="font-weight: bold;">User interface overview</span><br>
+<br>
+The basecode includes a simple interface and 3D viewer for loading and playing BVH files. See below for a screenshot. By default, we will load a character and two BVH files. <br>
+<br><img style="width: 1020px; height: 799px;" alt="BlendViewer.jpg" src="BlendViewer.jpg"><br><br>The camera can be controled with the mouse:<br></big><ul><li><big>Left-button drag with the mouse to rotate</big></li><li><big>Right-button drag with the mouse to pan</big></li><li><big>Middle-button drag with the mouse to zoom</big></li><li><big>'f' button will focus the view on the character<br></big></li></ul><big><big><big>
+</big><span style="font-weight: bold;"></span></big>The player control panel on the top left can be used to load and play files. The panel at the bottom left can be used to perform blends between motion 1 and motion 2.</big><big> The blend panel displays the name and number of keys for motion 1 and motion 2. Motions can be changed by clicking on the "Load Motion" buttons. To blend, you need to set the key from which to start blending from motion 1 and the target key to finish the blend in motion 2. The number of keys to use for blending&nbsp; The startTime specifies where in motion 1 to start blending and the endTime specifies where in motion 2 to finish blending. The number of blend keys controls the length of the cross fade blend.<br>&nbsp;&nbsp;&nbsp;&nbsp; </big><big><br></big><big>
+<span style="font-weight: bold;">Assignment</span><br>
+<br>
+</big><big>1. </big><big>(100 points) <span style="font-weight: bold;">Crossfade. </span>You will implement a crossfade between two motions. A crossfade transitions from a starting frame in motion 1 to a target frame in motion 2. The amount Implement MotionBlender::blend(). The cross fade will begin on motion 1 at startKey and end on motion 2 at endKey.&nbsp; Between these frames, you will blend pairs of keys while linearly varying the blend weight from 0 to 1. When the blend weight is 0, we get the start key back. When the blend weight is 1, we get the target key back. The length of the crossfade is determined by the number of blend keys. <br></big><ol><li>(10 points)&nbsp; Edit MotionBlender::blend to pass correct key parameters to the functions append, align, and crossfade. The blend function should combine motion 1 and motion 2 together with a smooth cross frade to transition between them and put the result into output.<br></li><li><big>(25 points) Implement MotionBlender::append. Append should add keys from the given input motion to the output motion. Keys can be added by appending poses or by working with motion curves directly. When appending keys, make sure to use versions of the functions which take either the key ID or the key time.<br></big></li><li><big>(25 points) Implement MotionBlender::align. The current motion curves contain global position changes for the root. By default, the blend will snap to the starting position of the next motion unless the target motion is translating to align with the end position of the starting motion. The Align() function will edit motion2 so that it's root position aligns with motion 1 at the starting frame.<br></big></li><li><big>(40 points) Implement MotionBlender::crossfade. Compute the transition frames from motion 1 to motion 2 and append the result in blend.The blend weight should change linearly across the blend duration such that the weight is 0.5 halfway through the fade.</big></li></ol><big>2. (25 points extra credit) <span style="font-weight: bold;">Foot clamping.</span> Detect foot contacts in the source and target motions to produce blends without foot sliding.<br></big><br><big><span style="font-weight: bold;">
+</span></big>
+<ol>
+  <big> </big>
+  <ol type="a">
+    <big> </big>
+  </ol></ol>
+
+<big><br>
+</big>
+<big><span style="font-weight: bold;color: rgb(255,0,0);">
+<a href="../README.html">Build and Submission Instructions!</a>
+</span></big>
+<br>
+</body>
+</html>

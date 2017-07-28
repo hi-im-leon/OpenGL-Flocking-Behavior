@@ -1,0 +1,81 @@
+<html>
+<head>
+</head>
+<body>
+<big style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;"><big>Interpolating rotations using splines!
+</big></big><br>
+<br>
+<big>In this assignment segment, you will implement <br>
+</big>
+<ul>
+  <li><big>linear and cubic splines for quaternions<br>
+    </big></li>
+</ul>
+<big>This framework contains two demos but this week, we will focus on only one of them: the <span style="font-weight: bold;">Curve Demo</span>. The Curve 
+Demo uses a rotational spline to animate the orientation of our yellow teapot. 
+In this assignment, you will implement linear spherical interpolation
+using Slerp and cubic spherical interpolation using Squad. Below is a
+screenshot.<br>
+<br>
+</big><big>The demo controls panel lets you select the current demo and
+set properties for either demo.</big><br>
+<big><br>
+</big>
+<table style="text-align: center; width: 100%;" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><big><img style="width: 510px; height: 400px;" alt="TeapotDemo" src="CurveDemo.jpg"></big></td>
+    </tr>
+    <tr>
+      <td>Curve Demo</td>
+    </tr>
+  </tbody>
+</table>
+<big><br>
+<br>
+</big>
+
+
+<span style="font-weight: bold;">Assignment</span><br>
+<br>
+<big>(50 points) <span style="font-weight: bold;">Quaternion
+splines. </span>The basecode includes a class ASplineQuaternion whose
+interface mirrors the spline you worked with for vectors in the
+previous assignment. In this assignment, you will complete the
+implementation by implementing Slerp and Squad. </big><big>See
+RotationViewer::drawDemo2() to debug your routines.</big>
+<ol>
+  <li><big>(20 points) <span style="font-weight: bold;">Linear
+interpolation.</span>&nbsp; Implement Quaternion::Slerp()</big></li>
+  <li><big>(30 points) <span style="font-weight: bold;">Cubic
+interpolation.</span> <br>
+    </big></li>
+  <ol>
+    <li><big>Implement Quaternion::Squad()</big></li>
+    <li><big>Implement Quaternion::Intermediate()</big></li>
+    <li><big>Compare the animation of the teapot using linear versus
+cubic interpolation. What are the differences? </big><big>(Note: The
+keys used for the demo are hard-coded in the RotationViewer
+constructor.) <br>
+      </big></li>
+  </ol>
+</ol>
+<big><span style="font-weight: bold;">Extra challenges!</span></big><big><br>
+These are optional assignment questions for those of you who want to take their assignments to the next level. Have your own idea you want to explore? Let the instructor know!
+</big>
+<ol>
+  <li><big>Add a ASplineVec3 to animate the position of the
+teapot in the curve demo<br></big></li>
+  <li><big>Add a ASplineVec3 to animate the color of the
+teapot in </big><big>the curve demo</big></li>
+  <li><big>Create a keyframed animation to make the teapot
+dance in </big><big>the curve demo. You will need to modify the hardcoded keys in the assignment.</big>
+	<li><big>Add a feature to allow a user to pose the teapot and set a key.</big></li>
+  </li>
+</ol>
+<big><span style="font-weight: bold;color: rgb(255,0,0);">
+<a href="../README.html">Build and Submission Instructions!</a>
+</span></big>
+<br>
+</body>
+</html>

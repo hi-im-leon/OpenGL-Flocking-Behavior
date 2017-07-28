@@ -1,0 +1,55 @@
+<html>
+<head>
+</head>
+<body>
+<big style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;"><big>Transformations
+and forward kinematics</big></big><br>
+<br>
+<big>In this assignment, you will implement transformations and forward
+kinematics. The features you implement in this assignment will lay the
+groundwork for working with motion capture and character animation.</big><span style="font-size: 11pt; color: rgb(0, 0, 0); font-style: normal; font-variant: normal;"></span><big>
+Specifically, after completing this assignment, you will be able to
+load a BVH motion capture file and play back the animation on a
+character.<br>
+<br>
+</big><big><span style="font-weight: bold;">About the basecode<br>
+<br>
+</span></big><big>This assignment builds on the previous assignments,
+adding a new library and applications. If you did not complete
+assignment 1, you may edit the basecode project file to use the
+solution library. Right click on the BVHViewer project, select
+Properties, and then expand the Linker options. Select 'Input' and then
+edit the 'Additional Libraries' to point to libAssignment1-soln.lib
+instead of libAssignment1.lib.<span style="font-weight: bold;"><span style="font-weight: bold;"><span style="font-weight: bold;"></span></span></span></big><br>
+<big><br>
+</big><big><span style="font-weight: bold;">User interface overview</span><br>
+<br>
+The basecode includes a simple interface and 3D viewer for loading and playing BVH files. See below for a screenshot. By default, we will load a character and several example BVH files. <br>
+<br>The camera can be controled with the mouse:<br></big><ul><li><big>Left-button drag with the mouse to rotate</big></li><li><big>Right-button drag with the mouse to pan</big></li><li><big>Middle-button drag with the mouse to zoom</big></li><li><big>'f' button will focus the view on the character<br></big></li></ul><big><big><big>
+</big><span style="font-weight: bold;"></span></big>The player control panel on the top left can be used to load and play files. The panel at the bottom left can be used to load different BVH files.<br><br><img style="width: 1020px; height: 799px;" alt="FKDemo" src="FKDemo.jpg"><br><br><br></big><big><span style="font-weight: bold;">Character animation implementation overview</span><br><br>The basecode includes a framework for organizing transforms into a hierachy and animating them using curves. The core data structure for supporting this functionality is the <span style="font-weight: bold;">AnimatableTransform</span>, which maintains pointers to parent and child transforms. The </big><big>AnimatableTransform primarily contains a Transform which keeps track of its position relative to its parent. It also stores its transform relative to the world coordinate system for convenience. </big><br><big><br>AnimatableTransforms are arranged into a hierachy with the </big><big><span style="font-weight: bold;">AnimatableHierarchy</span> class. The root of the </big><big>AnimatableHierarchy is positioned relative to the world coordinate system whereas all other joints are positioned relative to its parent in the hierachy. Although the AnimatableHierachy could be used to animate any group of transforms, for character animation it is natural to think of the AnimatbleHierachy as an <span style="font-weight: bold;">actor</span> and its corresponding </big><big>AnimatableTransforms as <span style="font-weight: bold;">joints</span>. </big><br><big><br>To support BVH files, we populate an AnimatableHierarchy using the skeleton information from the file. We then initialize curves based on the BVH file's motion data and store the result in </big><big><span style="font-weight: bold;">BVHController.</span></big><big> In the case of BVH, where joint limbs do not change length, the bvh controller only manages a single translational curve for the root joint. However, the BVHController does manage rotational curves for both the root and every joint. During playback, the BVHController queries the animation curves and then updates the transformations accordingly. <br><br>To summarize, the class hiererachy used for this asignment is the following:<br><br>BVHController<br>&nbsp;&nbsp;&nbsp; AnimatableHierarchy (aka Actor)<br>&nbsp;&nbsp;&nbsp; ASplineVec3 for the root joint position<br>&nbsp;&nbsp;&nbsp; ASplineQuaternion for each AnimatableTransform (aka Joint). <br>&nbsp;&nbsp;&nbsp;&nbsp; </big><big><br></big><big>
+<span style="font-weight: bold;">Assignment</span><br>
+<br>
+</big><big>1. </big><big>(20 points) <span style="font-weight: bold;">Transformations. </span>You will complete the implementation of the Transform class. These features will support a character skeleton whose limbs are arranged in a hierarchy where each child is positioned relative to its parent.<span style="font-weight: bold;"><br>
+</span></big>
+<ol>
+  <big> </big>
+  <ol type="a">
+    <big> </big>
+  </ol>
+  <li><big>(5 points) Implement Transform::Inverse()</big></li><li><big>(5 points) </big><big>Implement </big><big>Transform::TransformPoint() <br></big></li><li><big>(5 points) </big><big>Implement </big><big>Transform::TransformVector()</big></li><li><big>(5 points) </big><big>Implement </big><big> </big><big>operator* () for the Transform class<br></big></li>
+  
+</ol>
+<big>2. </big><big>(10 points) <span style="font-weight: bold;">Forward
+kinematics</span> </big><big>is the process of computing each transform's position relative to
+the world's coordinate system. We read in each joint's local
+translation from the BVH file and then update each joint's local
+rotation as we playback the motion. The global transformations are
+computed by propagating the transforms of each parent to its children. Implement AnimatableHierarchy::updateHierachy() and AnimatableTransform::updateTransformation().</big><br><br>
+<big><br>
+</big>
+<big><span style="font-weight: bold;color: rgb(255,0,0);">
+<a href="../README.html">Build and Submission Instructions!</a>
+</span></big>
+<br>
+</body>
+</html>

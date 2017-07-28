@@ -1,0 +1,5 @@
+project(ChaseViewer)
+include_directories(../libsrc/animation ../libsrc/ui ../3rdparty/AntTweakBar/include)
+link_directories(/usr/X11R6/lib libsrc/animation libsrc/ui ../lib ../3rdparty/AntTweakBar/lib)
+add_executable(ChaseViewer BVHViewer.cpp characterParticle.cpp behaviors.cpp BVHMain)
+target_link_libraries(ChaseViewer animationfk animationbasic animationcurve animationscurve ui AntTweakBar GLEW glut GL GLU X11)

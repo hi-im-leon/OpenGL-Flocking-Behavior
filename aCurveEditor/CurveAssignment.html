@@ -1,0 +1,183 @@
+<html>
+<head>
+</head>
+<body>
+<big style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;">
+<big>Curve Assignment</big></big> <br>
+<br>
+<big>In this assignment, you will complete an interactive 2D curve
+editor.
+<br>
+<br>
+<span style="font-weight: bold;">User interface overview</span><br>
+<br>
+The basecode includes a simple orthographics view to test your curve
+code. </big><big>A screenshot is below. </big><big>With the 'Curve
+Controls' panel on the top left, you can create and edit curves. Blue
+points represent the input data which are interpolated between. Yellow
+points represent control points which are computed based on the input
+data.&nbsp; The input data points are also called keys.<br>
+</big>
+<ul>
+  <li><big>The <span style="font-weight: bold;">Type</span> drop-down
+menu specifies how curve points are interpolated. You will implement
+linear, Bernstein, Castlejau, Hermite, Matrix, and B-Splines. <br>
+    </big></li>
+  <li><big>The <span style="font-weight: bold;">Mode</span> drop-down
+menu specifies how left mouse clicks are interpreted: <br>
+    </big></li>
+  <ul>
+    <li><big><span style="font-weight: bold;">Add</span> will append
+points to the curve when you left click with mouse;<br>
+      </big></li>
+    <li><big><span style="font-weight: bold;">Edit</span> will allow
+you to drag curve points (blue) and control points (yellow) using the
+left mouse button; <br>
+      </big></li>
+    <li><big><span style="font-weight: bold;">Delete</span> will remove
+curve points (blue) when you select one with the left mouse button. <br>
+      </big></li>
+  </ul>
+  <li><big>The <span style="font-weight: bold;">Ctrl pts</span> button
+will toggle the display of control points (yellow). <br>
+    </big></li>
+  <li><big>The <span style="font-weight: bold;">Clear</span> button
+will remove the entire curve.<br>
+    </big></li>
+</ul>
+<big><br>
+<img style="width: 1020px; height: 799px;" alt="screesnhot" src="Curve-Screenshot.png"><br>
+<br>
+</big><big><span style="font-weight: bold;">Curve implementation overview<br>
+</span><br>
+The curves you implement in this assignment will be the foundation for
+animating objects, characters, and crowds for the remainder of the
+course. In this assignment, keys are locations in space and the 'time'
+associated with each point controls the number of interpolation points
+between each input. However, in future assignments, the same curves
+will be used to specify changes in state over time. For example, a key
+could be the location of a character at a given time or it could be the
+color of a particle over time. <br>
+<br>
+This assignment asks you to implement curves which support vectors. (In
+your next assignment, you will implement an analagous spline for
+interpolating rotations). Animation curves consist of keyframes, where
+each keyframe is time/value pair. In this assignment, we will assume
+that given data points are uniformly spaced, </big><big>e.g. the first
+key is at time 0, the second key st time 1.0, etc. The framerate of the
+curve then determines the number of samples between each key. For
+example, if the framerate is 10 fps, the timestep will be 1.0/10 = 0.1,
+and the number of samples between each key is 10.<br>
+<br>
+You will need to implement two core features for each interpolation
+type. First, you will need to compute control points based on the
+curve's keys. Second, you will need to implement the associated
+interpolation function. In this implementation, the control points and
+full curve are recalculated whenever the data changes with calls to
+ASplineVec3::computeControlPoints() and ASplineVec3::cacheCurve().
+These functions then call the current algorithm based on the spline
+type, which are implemented as subclasses of </big><big>AInterpolatorVec3.
+Below is the class hierarchy of the interpolators you will implement:</big><br>
+<big><br>
+AInterpolatorVec3<br>
+&nbsp;&nbsp;&nbsp; ALinearInterpolatorVec3<br>
+&nbsp;&nbsp;&nbsp; ACubicInterpolatorVec3<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ABernsteinInterpolatorVec3<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ACasteljauInterpolatorVec3<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; AMatrixInterpolatorVec3<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; AHermiteInterpolatorVec3<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ABSplineInterpolatorVec3<br>
+<br>
+Given control and data points, the full curve is computed by going
+through each subsequent pair of keys and then interpolating between
+them (implemented in AInterpolatorVec3::interpolate()). The pseudocode
+looks like<br>
+<br>
+&nbsp;&nbsp; clearCurve();<br>
+&nbsp;&nbsp; for each segment<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key1 = segment.start<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key2 = segment.end<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time = key1.time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while time &lt; key2.time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+u = fraction of duration between key1 and key2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+time += timeStep<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+value = interpolate(data, controlPoints, segment, u)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+curve.append(value);<br>
+&nbsp;&nbsp;&nbsp; curve.append(lastKey);<br>
+</big><big><br>
+<span style="font-weight: bold;">Assignment</span><br>
+<br>
+1. (5 points) <span style="font-weight: bold;">Linear</span></big><big><span style="font-weight: bold;"> splines. </span></big><big>To get warmed
+up, you will implement a piece-wise linear curve. Given keyframe</big><big>
+points
+are<span style="font-weight: bold;"> p</span><sub>i</sub>
+= [x<sub>i</sub>, y<sub>i, </sub></big><big>z<sub>i</sub></big><big>]<sup>T</sup>
+(i = 0 to m) from the user, complete the implementations for <br>
+</big>
+<ol>
+  <li><big>Compute the interpolation fraction in </big><big>AInterpolatorVec3::interpolate()</big></li>
+  <li><big>ALinearInterpolatorVec3::interpolateSegment().</big></li>
+</ol>
+<big><br>
+2. </big><big>(50 points) <span style="font-weight: bold;">Cubic
+splines.</span> Now, let's implement piece-wise cubic curves. You will
+implement three equivalent methods. Given keyframe points of the form <span style="font-weight: bold;">p</span><sub>i</sub> = [x<sub>i</sub>, y<sub>i</sub>]<sup>T</sup>
+(i = 0 to m), construct a cubic spline that interpolates the <span style="font-weight: bold;">p</span><sub>i</sub> data points. <span style="font-weight: bold;"><br>
+</span></big>
+<ol>
+  <big> </big>
+  <ol type="a">
+    <big> </big>
+  </ol>
+  <li><big>(20 points) <span style="font-weight: bold;">Compute
+control points. </span>Implement
+ACubicInterpolatorVec3::computeControlPoints()<br>
+    </big></li>
+  <li><big>(10 points)<span style="font-weight: bold;"> Bernstein.</span>
+Implement ABernsteinInterpolatorVec3::interpolateSegment()&nbsp;</big><big>
+    </big> </li>
+  <ol type="a">
+    <big> </big>
+  </ol>
+  <li> <big>(10 points) <span style="font-weight: bold;">De
+Casteljau.</span>
+Implement ACasteljauInterpolatorVec3::</big><big>interpolateSegment()</big><big>&nbsp;&nbsp;</big>
+  </li>
+  <li> <big>(10 points) <span style="font-weight: bold;">Matrix</span>.
+Implement </big><big>AMatrixInterpolatorVec3::</big><big>interpolateSegment()</big><big>&nbsp;</big>
+  </li>
+  <big> </big>
+</ol>
+<big>3. (20 points) <span style="font-weight: bold;">Hermite spline</span>.
+I</big><big>mplement
+a Hermite spline having C<sup>2</sup> continuity which </big><big>supports
+either clamped or natural end point conditions.</big><big> Implement
+AHermiteInterpolatorVec3::computeControlPoints() and
+AHermiteInterpolatorVec3::interpolateSegment()<br>
+<br>
+4. (25 points) <span style="font-weight: bold;">Cubic B-Spline</span>.
+Implement a Bezier curve with natural end point conditions using a
+B-Spline formulation. Implement
+ABSplineInterpolatorVec3::computeControlPoints() and </big><big>ABSplineInterpolatorVec3::interpolateSegment().
+Feel free to add helper functions to this class to make the
+implementation clearer.<br>
+<br>
+<span style="font-weight: bold;">Extra credit</span>.
+<ol>
+<li>Implement an additional interpolation type as a subclasses of </big><big>AInterpolatorVec3.
+For example try a step interpolator, a higher order polynomial, or a
+'wiggly' interpolator.</li>
+<li>Create a cool drawing with the splines.</li>
+<li>Try animating the control points.</li>
+<li>Extend the application to show multiple splines. Show splines in different colors.</li>
+</ol></big><br>
+<big><span style="font-weight: bold;color: rgb(255,0,0);">
+<a href="../README.html">Build and Submission Instructions!</a>
+</span></big>
+<br>
+</body>
+</html>
